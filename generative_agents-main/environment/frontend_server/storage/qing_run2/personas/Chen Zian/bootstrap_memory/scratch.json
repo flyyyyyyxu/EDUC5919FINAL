@@ -1,0 +1,219 @@
+{
+  "vision_r": 8,
+  "att_bandwidth": 8,
+  "retention": 8,
+  "curr_time": "February 15, 742, 06:00:00",
+  "curr_tile": [
+    123,
+    57
+  ],
+  "daily_plan_req": "Chen Zian studies Confucian classics at home from 6am to 9am, visits the academy or bookshop in the morning, eats at the tea house around noon, studies poems and policy essays in the afternoon, and returns home before the night curfew.",
+  "name": "Chen Zian",
+  "first_name": "Zian",
+  "last_name": "Chen",
+  "age": 24,
+  "innate": "ambitious, thoughtful, disciplined",
+  "learned": "Chen Zian is a young scholar from a provincial family who has come to Chang'an to prepare for the imperial examination. He admires poetry, Confucian learning, and official service. He often worries about whether his writing is elegant enough to impress examiners.",
+  "currently": "Chen Zian is preparing for the upcoming imperial examination. He is reviewing classical texts, practicing regulated verse, and asking educated acquaintances for advice about court politics and essay style.",
+  "lifestyle": "Chen Zian goes to bed around 10:30pm, and wakes up around 5:30am.",
+  "living_area": "the Ville:Dorm for Oak Hill College:common room",
+  "concept_forget": 100,
+  "daily_reflection_time": 180,
+  "daily_reflection_size": 5,
+  "overlap_reflect_th": 4,
+  "kw_strg_event_reflect_th": 10,
+  "kw_strg_thought_reflect_th": 9,
+  "recency_w": 1,
+  "relevance_w": 1,
+  "importance_w": 1,
+  "recency_decay": 0.99,
+  "importance_trigger_max": 150,
+  "importance_trigger_curr": 144,
+  "importance_ele_n": 6,
+  "thought_count": 5,
+  "daily_req": [
+    "wake up and complete the morning routine at 8:00 am",
+    "review Confucian classics at his rented room from 8:00 am to 10:30 am",
+    "walk to the academy to consult with a teacher about essay structure from 10:30 am to 12:30 pm",
+    "have lunch at a tea house near the academy around 12:30 pm",
+    "browse poetry collections at a nearby bookshop from 2:00 pm to 4:00 pm",
+    "return home and practice composing a regulated verse poem from 4:30 pm to 6:30 pm",
+    "have a simple dinner",
+    "review his notes on recent court politics and policy debates from 8:00 pm to 9:30 pm"
+  ],
+  "f_daily_schedule": [
+    [
+      "sleeping",
+      480
+    ],
+    [
+      "waking up and completing his morning routine (waking up and stretching)",
+      5
+    ],
+    [
+      "waking up and completing his morning routine (washing his face and hands with water from the basin)",
+      10
+    ],
+    [
+      "waking up and completing his morning routine (combing his hair and tying it properly)",
+      5
+    ],
+    [
+      "waking up and completing his morning routine (dressing in his scholar's robes)",
+      5
+    ],
+    [
+      "waking up and completing his morning routine (brewing a pot of tea)",
+      5
+    ],
+    [
+      "waking up and completing his morning routine (reciting passages from the Confucian classics)",
+      10
+    ],
+    [
+      "waking up and completing his morning routine (eating a simple breakfast of rice porridge and pickled vegetables)",
+      10
+    ],
+    [
+      "waking up and completing his morning routine (organizing his study materials for the morning's review session)",
+      5
+    ],
+    [
+      "waking up and completing his morning routine (reviewing his notes from previous study sessions)",
+      5
+    ],
+    [
+      "reviewing Confucian classics at his rented room",
+      120
+    ],
+    [
+      "walking to the academy to consult with a teacher about essay structure",
+      60
+    ],
+    [
+      "consulting with a teacher at the academy about essay structure",
+      60
+    ],
+    [
+      "having lunch at a tea house near the academy",
+      60
+    ],
+    [
+      "browsing poetry collections at a nearby bookshop",
+      120
+    ],
+    [
+      "returning home from the bookshop to practice composing a regulated verse poem",
+      60
+    ],
+    [
+      "returning home and practicing composing a regulated verse poem",
+      60
+    ],
+    [
+      "practicing composing a regulated verse poem at his rented room",
+      60
+    ],
+    [
+      "having a simple dinner at his rented room",
+      60
+    ],
+    [
+      "reviewing his notes on recent court politics and policy debates",
+      120
+    ],
+    [
+      "preparing for bed and reviewing tomorrow's study plan",
+      60
+    ],
+    [
+      "sleeping",
+      60
+    ],
+    [
+      "sleeping",
+      0
+    ]
+  ],
+  "f_daily_schedule_hourly_org": [
+    [
+      "sleeping",
+      480
+    ],
+    [
+      "waking up and completing his morning routine",
+      60
+    ],
+    [
+      "reviewing Confucian classics at his rented room",
+      120
+    ],
+    [
+      "walking to the academy to consult with a teacher about essay structure",
+      60
+    ],
+    [
+      "consulting with a teacher at the academy about essay structure",
+      60
+    ],
+    [
+      "having lunch at a tea house near the academy",
+      60
+    ],
+    [
+      "browsing poetry collections at a nearby bookshop",
+      120
+    ],
+    [
+      "returning home from the bookshop to practice composing a regulated verse poem",
+      60
+    ],
+    [
+      "returning home and practicing composing a regulated verse poem",
+      60
+    ],
+    [
+      "practicing composing a regulated verse poem at his rented room",
+      60
+    ],
+    [
+      "having a simple dinner at his rented room",
+      60
+    ],
+    [
+      "reviewing his notes on recent court politics and policy debates",
+      120
+    ],
+    [
+      "preparing for bed and reviewing tomorrow's study plan",
+      60
+    ],
+    [
+      "sleeping",
+      60
+    ]
+  ],
+  "act_address": "the Ville:Dorm for Oak Hill College:Chen Zian's room:bed",
+  "act_start_time": "February 15, 742, 06:00:00",
+  "act_duration": 480,
+  "act_description": "sleeping",
+  "act_pronunciatio": "\ud83d\ude34\ud83d\udca4",
+  "act_event": [
+    "Chen Zian",
+    "is",
+    "sleep"
+  ],
+  "act_obj_description": "occupied",
+  "act_obj_pronunciatio": "\ud83d\udc64",
+  "act_obj_event": [
+    "bed",
+    "bed",
+    "is"
+  ],
+  "chatting_with": null,
+  "chat": null,
+  "chatting_with_buffer": {},
+  "chatting_end_time": null,
+  "act_path_set": true,
+  "planned_path": []
+}

@@ -1,0 +1,676 @@
+{
+  "vision_r": 8,
+  "att_bandwidth": 8,
+  "retention": 8,
+  "curr_time": "February 15, 742, 06:00:00",
+  "curr_tile": [
+    126,
+    46
+  ],
+  "daily_plan_req": "An Lushan checks his goods at the West Market at 8am everyday, meets buyers and translators during the day, visits the tea house in the afternoon to exchange news, and returns to the caravan lodging before the evening curfew.",
+  "name": "An Lushan",
+  "first_name": "Lushan",
+  "last_name": "An",
+  "age": 38,
+  "innate": "shrewd, sociable, adaptive",
+  "learned": "An Lushan is a Sogdian merchant living in Chang'an who trades in spices, glassware, horses, and textiles from the Silk Road. He speaks several languages and often acts as a bridge between foreign merchants and local Chinese buyers. He respects Tang law but is always looking for profitable opportunities.",
+  "currently": "An Lushan is trying to sell a new shipment of foreign glass cups and aromatic spices at the West Market. He is also looking for reliable local partners before the next caravan leaves Chang'an.",
+  "lifestyle": "An Lushan goes to bed around 11pm, and wakes up around 6am.",
+  "living_area": "the Ville:The Rose and Crown Pub:pub",
+  "concept_forget": 100,
+  "daily_reflection_time": 180,
+  "daily_reflection_size": 5,
+  "overlap_reflect_th": 4,
+  "kw_strg_event_reflect_th": 10,
+  "kw_strg_thought_reflect_th": 9,
+  "recency_w": 1,
+  "relevance_w": 1,
+  "importance_w": 1,
+  "recency_decay": 0.99,
+  "importance_trigger_max": 150,
+  "importance_trigger_curr": 145,
+  "importance_ele_n": 5,
+  "thought_count": 5,
+  "daily_req": [
+    "wake up and complete the morning routine at 6:00 am",
+    "eat breakfast and prepare for the day at 7:00 am",
+    "check his goods at the West Market at 8:00 am",
+    "meet with buyers and translators at the market from 9:00 am to 12:00 pm",
+    "have lunch at a nearby food stall at 12:30 pm",
+    "visit the tea house in the afternoon around 2:00 pm to exchange news with other merchants and potential partners",
+    "conduct business negotiations or inspect new merchandise from 4:00 to 6:00 pm",
+    "return to the caravan lodging before the evening curfew"
+  ],
+  "f_daily_schedule": [
+    [
+      "sleeping",
+      360
+    ],
+    [
+      "waking up and completing the morning routine",
+      60
+    ],
+    [
+      "eating breakfast and preparing for the day (1) Lushan is eating a simple breakfast of flatbread and dried fruit)",
+      10
+    ],
+    [
+      "eating breakfast and preparing for the day (reviewing his inventory list of glass cups and spices)",
+      10
+    ],
+    [
+      "eating breakfast and preparing for the day (selecting which goods to prominently display today)",
+      5
+    ],
+    [
+      "eating breakfast and preparing for the day (preparing small samples of the aromatic spices)",
+      5
+    ],
+    [
+      "eating breakfast and preparing for the day (organizing his coin purse and checking his remaining silver)",
+      5
+    ],
+    [
+      "eating breakfast and preparing for the day (ensuring his trading documents are in order)",
+      5
+    ],
+    [
+      "eating breakfast and preparing for the day (dressing in his merchant's robes and cloak)",
+      5
+    ],
+    [
+      "eating breakfast and preparing for the day (washing his face and tidying his hair)",
+      5
+    ],
+    [
+      "eating breakfast and preparing for the day (practicing his sales pitches in Sogdian and Chinese)",
+      5
+    ],
+    [
+      "eating breakfast and preparing for the day (gathering his things and checking the weather)",
+      5
+    ],
+    [
+      "checking his goods at the West Market",
+      60
+    ],
+    [
+      "meeting with buyers and translators at the West Market",
+      60
+    ],
+    [
+      "continuing to meet with buyers and translators at the West Market",
+      120
+    ],
+    [
+      "finishing up meetings with buyers and translators at the West Market",
+      60
+    ],
+    [
+      "finishing lunch at a nearby food stall",
+      60
+    ],
+    [
+      "visiting the tea house to exchange news with other merchants and potential partners",
+      60
+    ],
+    [
+      "conducting business negotiations or inspecting new merchandise",
+      180
+    ],
+    [
+      "returning to the caravan lodging before the evening curfew",
+      60
+    ],
+    [
+      "having dinner and organizing his merchandise at the caravan lodging",
+      60
+    ],
+    [
+      "resting and reviewing his accounts at the caravan lodging",
+      60
+    ],
+    [
+      "preparing for bed at the caravan lodging",
+      60
+    ],
+    [
+      "going to bed at the caravan lodging",
+      60
+    ],
+    [
+      "sleeping",
+      60
+    ],
+    [
+      "sleeping",
+      0
+    ]
+  ],
+  "f_daily_schedule_hourly_org": [
+    [
+      "sleeping",
+      360
+    ],
+    [
+      "waking up and completing the morning routine",
+      60
+    ],
+    [
+      "eating breakfast and preparing for the day",
+      60
+    ],
+    [
+      "checking his goods at the West Market",
+      60
+    ],
+    [
+      "meeting with buyers and translators at the West Market",
+      60
+    ],
+    [
+      "continuing to meet with buyers and translators at the West Market",
+      120
+    ],
+    [
+      "finishing up meetings with buyers and translators at the West Market",
+      60
+    ],
+    [
+      "finishing lunch at a nearby food stall",
+      60
+    ],
+    [
+      "visiting the tea house to exchange news with other merchants and potential partners",
+      60
+    ],
+    [
+      "conducting business negotiations or inspecting new merchandise",
+      180
+    ],
+    [
+      "returning to the caravan lodging before the evening curfew",
+      60
+    ],
+    [
+      "having dinner and organizing his merchandise at the caravan lodging",
+      60
+    ],
+    [
+      "resting and reviewing his accounts at the caravan lodging",
+      60
+    ],
+    [
+      "preparing for bed at the caravan lodging",
+      60
+    ],
+    [
+      "going to bed at the caravan lodging",
+      60
+    ],
+    [
+      "sleeping",
+      60
+    ]
+  ],
+  "act_address": "the Ville:The Rose and Crown Pub:pub:shelf",
+  "act_start_time": "February 15, 742, 06:00:00",
+  "act_duration": 60,
+  "act_description": "waking up and completing the morning routine",
+  "act_pronunciatio": "\ud83c\udf05\ud83e\uddfc",
+  "act_event": [
+    "An Lushan",
+    "wake up",
+    "morning routine"
+  ],
+  "act_obj_description": "being used",
+  "act_obj_pronunciatio": "\ud83d\udd90\ud83d\udd27",
+  "act_obj_event": [
+    "shelf",
+    "shelf",
+    "is"
+  ],
+  "chatting_with": null,
+  "chat": null,
+  "chatting_with_buffer": {},
+  "chatting_end_time": null,
+  "act_path_set": true,
+  "planned_path": [
+    [
+      128,
+      46
+    ],
+    [
+      129,
+      46
+    ],
+    [
+      130,
+      46
+    ],
+    [
+      131,
+      46
+    ],
+    [
+      131,
+      47
+    ],
+    [
+      131,
+      48
+    ],
+    [
+      131,
+      49
+    ],
+    [
+      131,
+      50
+    ],
+    [
+      130,
+      50
+    ],
+    [
+      129,
+      50
+    ],
+    [
+      128,
+      50
+    ],
+    [
+      127,
+      50
+    ],
+    [
+      126,
+      50
+    ],
+    [
+      125,
+      50
+    ],
+    [
+      124,
+      50
+    ],
+    [
+      123,
+      50
+    ],
+    [
+      122,
+      50
+    ],
+    [
+      121,
+      50
+    ],
+    [
+      120,
+      50
+    ],
+    [
+      119,
+      50
+    ],
+    [
+      118,
+      50
+    ],
+    [
+      117,
+      50
+    ],
+    [
+      117,
+      49
+    ],
+    [
+      117,
+      48
+    ],
+    [
+      117,
+      47
+    ],
+    [
+      116,
+      47
+    ],
+    [
+      115,
+      47
+    ],
+    [
+      114,
+      47
+    ],
+    [
+      113,
+      47
+    ],
+    [
+      112,
+      47
+    ],
+    [
+      111,
+      47
+    ],
+    [
+      110,
+      47
+    ],
+    [
+      109,
+      47
+    ],
+    [
+      108,
+      47
+    ],
+    [
+      107,
+      47
+    ],
+    [
+      106,
+      47
+    ],
+    [
+      105,
+      47
+    ],
+    [
+      104,
+      47
+    ],
+    [
+      103,
+      47
+    ],
+    [
+      102,
+      47
+    ],
+    [
+      101,
+      47
+    ],
+    [
+      100,
+      47
+    ],
+    [
+      99,
+      47
+    ],
+    [
+      98,
+      47
+    ],
+    [
+      98,
+      46
+    ],
+    [
+      98,
+      45
+    ],
+    [
+      98,
+      44
+    ],
+    [
+      98,
+      43
+    ],
+    [
+      98,
+      42
+    ],
+    [
+      98,
+      41
+    ],
+    [
+      98,
+      40
+    ],
+    [
+      98,
+      39
+    ],
+    [
+      98,
+      38
+    ],
+    [
+      98,
+      37
+    ],
+    [
+      97,
+      37
+    ],
+    [
+      96,
+      37
+    ],
+    [
+      95,
+      37
+    ],
+    [
+      94,
+      37
+    ],
+    [
+      93,
+      37
+    ],
+    [
+      92,
+      37
+    ],
+    [
+      91,
+      37
+    ],
+    [
+      90,
+      37
+    ],
+    [
+      89,
+      37
+    ],
+    [
+      88,
+      37
+    ],
+    [
+      87,
+      37
+    ],
+    [
+      86,
+      37
+    ],
+    [
+      85,
+      37
+    ],
+    [
+      84,
+      37
+    ],
+    [
+      83,
+      37
+    ],
+    [
+      82,
+      37
+    ],
+    [
+      81,
+      37
+    ],
+    [
+      80,
+      37
+    ],
+    [
+      79,
+      37
+    ],
+    [
+      78,
+      37
+    ],
+    [
+      77,
+      37
+    ],
+    [
+      76,
+      37
+    ],
+    [
+      75,
+      37
+    ],
+    [
+      74,
+      37
+    ],
+    [
+      73,
+      37
+    ],
+    [
+      72,
+      37
+    ],
+    [
+      71,
+      37
+    ],
+    [
+      70,
+      37
+    ],
+    [
+      69,
+      37
+    ],
+    [
+      68,
+      37
+    ],
+    [
+      67,
+      37
+    ],
+    [
+      66,
+      37
+    ],
+    [
+      65,
+      37
+    ],
+    [
+      64,
+      37
+    ],
+    [
+      63,
+      37
+    ],
+    [
+      62,
+      37
+    ],
+    [
+      61,
+      37
+    ],
+    [
+      60,
+      37
+    ],
+    [
+      59,
+      37
+    ],
+    [
+      58,
+      37
+    ],
+    [
+      57,
+      37
+    ],
+    [
+      56,
+      37
+    ],
+    [
+      56,
+      36
+    ],
+    [
+      56,
+      35
+    ],
+    [
+      56,
+      34
+    ],
+    [
+      56,
+      33
+    ],
+    [
+      56,
+      32
+    ],
+    [
+      56,
+      31
+    ],
+    [
+      56,
+      30
+    ],
+    [
+      56,
+      29
+    ],
+    [
+      56,
+      28
+    ],
+    [
+      56,
+      27
+    ],
+    [
+      56,
+      26
+    ],
+    [
+      55,
+      26
+    ],
+    [
+      54,
+      26
+    ]
+  ]
+}

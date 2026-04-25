@@ -401,12 +401,17 @@ class ReverieServer:
           with open(curr_move_file, "w") as outfile: 
             outfile.write(json.dumps(movements, indent=2))
 
-          # After this cycle, the world takes one step forward, and the 
-          # current time moves by <sec_per_step> amount. 
+          # After this cycle, the world takes one step forward, and the
+          # current time moves by <sec_per_step> amount.
           self.step += 1
           self.curr_time += datetime.timedelta(seconds=self.sec_per_step)
 
           int_counter -= 1
+
+          # Auto-save every 100 steps so progress isn't lost on crash.
+          if self.step % 100 == 0:
+            self.save()
+            print(f"[Auto-saved at step {self.step}]")
           
       # Sleep so we don't burn our machines. 
       time.sleep(self.server_sleep)
