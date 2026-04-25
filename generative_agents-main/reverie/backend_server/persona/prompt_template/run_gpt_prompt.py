@@ -265,21 +265,23 @@ def run_gpt_prompt_generate_hourly_schedule(persona,
   # # ChatGPT Plugin ===========================================================
 
 
-  gpt_param = {"engine": "text-davinci-003", "max_tokens": 50, 
+  gpt_param = {"engine": "text-davinci-003", "max_tokens": 50,
                "temperature": 0.5, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": ["\n"]}
-  prompt_template = "persona/prompt_template/v2/generate_hourly_schedule_v2.txt"
-  prompt_input = create_prompt_input(persona, 
-                                     curr_hour_str, 
+  prompt_template = "persona/prompt_template/v3_ChatGPT/generate_hourly_schedule_v2.txt"
+  prompt_input = create_prompt_input(persona,
+                                     curr_hour_str,
                                      p_f_ds_hourly_org,
-                                     hour_str, 
+                                     hour_str,
                                      intermission2,
                                      test_input)
   prompt = generate_prompt(prompt_input, prompt_template)
+  example_output = "studying for her music classes"
+  special_instruction = "The output should ONLY include the part of the sentence that completes the last line in the schedule above. No period at the end."
   fail_safe = get_fail_safe()
-  
-  output = safe_generate_response(prompt, gpt_param, 5, fail_safe,
-                                   __func_validate, __func_clean_up)
+
+  output = ChatGPT_safe_generate_response(prompt, example_output, special_instruction, 3, fail_safe,
+                                          __func_validate, __func_clean_up)
   
   if debug or verbose: 
     print_run_prompts(prompt_template, persona, gpt_param, 

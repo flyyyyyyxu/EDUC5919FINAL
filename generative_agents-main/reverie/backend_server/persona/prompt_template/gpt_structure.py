@@ -9,6 +9,28 @@ import json
 import re
 import time
 
+_COMPLETION_SYSTEM = (
+  "You are a text completion engine. The user gives you a text that ends "
+  "mid-sentence, mid-phrase, or mid-list. Output ONLY the direct continuation "
+  "of that text. Do not restate the prompt, do not explain, do not add "
+  "any preamble or commentary. Just continue the text exactly where it left off."
+)
+
+# Patterns that indicate the model is narrating instead of completing
+_PREAMBLE_RE = re.compile(
+  r'^(the user\'?s?\b.{0,20}(asks?|says?|gives?|provides?|wants?|writes?|is asking|is telling|instruction)'
+  r'|here (is|are) (my|the|a)\b'
+  r'|i (should|need to|will|can|think|would)\b'
+  r'|looking at\b'
+  r'|based on\b'
+  r'|so (i|the|we)\b'
+  r'|thus\b'
+  r'|therefore\b'
+  r'|answer:\s*'
+  r'|completion:\s*)',
+  re.IGNORECASE,
+)
+
 import numpy
 import requests
 
@@ -32,12 +54,16 @@ def _call_minimax(messages,
                   temperature=1.0,
                   top_p=0.95,
                   model=None):
+  # Prepend system message if not already present
+  if not messages or messages[0].get("role") != "system":
+    messages = [{"role": "system", "content": _COMPLETION_SYSTEM}] + messages
+
   payload = {
     "model": model or minimax_text_model,
     "messages": messages,
     "temperature": _clamp_temperature(temperature),
     "top_p": min(max(float(top_p), 0.01), 1.0),
-    "max_tokens": int(max_tokens),
+    "max_tokens": int(max_tokens) + (200 if max_tokens <= 100 else 800),
   }
   response = requests.post(
     MINIMAX_CHAT_COMPLETIONS_URL,
@@ -48,9 +74,20 @@ def _call_minimax(messages,
     json=payload,
     timeout=180,
   )
+  if not response.ok:
+    print(f"MINIMAX HTTP {response.status_code}: {response.text}")
   response.raise_for_status()
   data = response.json()
-  return data["choices"][0]["message"]["content"]
+  content = data["choices"][0]["message"]["content"]
+  # Strip chain-of-thought think blocks
+  content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL).strip()
+  # Drop leading lines that are meta-commentary rather than the actual completion
+  lines = content.split("\n")
+  for i, line in enumerate(lines):
+    if line.strip() and not _PREAMBLE_RE.match(line.strip()):
+      content = "\n".join(lines[i:]).strip()
+      break
+  return content
 
 
 def ChatGPT_single_request(prompt):
@@ -205,21 +242,28 @@ def ChatGPT_safe_generate_response_OLD(prompt,
 # ###################[SECTION 2: ORIGINAL GPT-3 STRUCTURE] ###################
 # ============================================================================
 
+_LIST_ITEM_RE = re.compile(r"(\d+\)\s*)$")
+
 def GPT_request(prompt, gpt_parameter):
   """
   Legacy completion wrapper now routed through MiniMax chat completions.
   """
   temp_sleep()
   try:
-    return _call_minimax(
+    result = _call_minimax(
       messages=[{"role": "user", "content": prompt}],
       max_tokens=gpt_parameter.get("max_tokens", 512),
       temperature=gpt_parameter.get("temperature", 1.0),
       top_p=gpt_parameter.get("top_p", 0.95),
       model=gpt_parameter.get("model", minimax_text_model),
     )
-  except:
-    print("MINIMAX REQUEST FAILED")
+    # If the prompt already ends with "N) " and the model repeated it, strip it
+    m = _LIST_ITEM_RE.search(prompt.rstrip())
+    if m and result.startswith(m.group(1)):
+      result = result[len(m.group(1)):]
+    return result
+  except Exception as e:
+    print(f"MINIMAX REQUEST FAILED: {e}")
     return "MINIMAX REQUEST FAILED"
 
 
