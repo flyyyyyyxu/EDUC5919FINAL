@@ -1,85 +1,74 @@
 {
   "the Ville": {
-    "Oak Hill College": {
-      "hallway": [],
-      "library": [
-        "library sofa",
-        "library table",
-        "bookshelf"
+    "国子监": {
+      "回廊": [],
+      "藏书阁": [
+        "软榻",
+        "阅书案",
+        "书架"
       ],
-      "classroom": [
-        "blackboard",
-        "classroom podium",
-        "classroom student seating"
+      "讲堂": [
+        "经文木牌",
+        "讲台",
+        "学子席"
       ]
     },
-    "Dorm for Oak Hill College": {
-      "garden": [
-        "dorm garden"
+    "学子客舍": {
+      "庭院": [
+        "学舍庭院"
       ],
-      "Klaus Mueller's room": [
-        "bed",
-        "game console",
-        "closet",
-        "desk"
+      "陈子安的厢房": [
+        "床榻",
+        "博弈棋盘",
+        "衣橱",
+        "书案"
       ],
-      "woman's bathroom": [
-        "toilet",
-        "shower",
-        "bathroom sink"
+      "女净室": [
+        "茅坑",
+        "浴桶",
+        "铜盆架"
       ],
-      "common room": [
-        "common room sofa",
-        "pool table",
-        "common room table"
+      "公共厅堂": [
+        "木榻",
+        "棋盘台",
+        "方桌"
       ],
-      "man's bathroom": [
-        "shower",
-        "bathroom sink",
-        "toilet"
+      "男净室": [
+        "浴桶",
+        "铜盆架",
+        "茅坑"
       ]
     },
-    "The Willows Market and Pharmacy": {
-      "store": [
-        "grocery store shelf",
-        "behind the grocery counter",
-        "grocery store counter",
-        "pharmacy store shelf",
-        "pharmacy store counter",
-        "behind the pharmacy counter"
+    "西市药肆": {
+      "药铺": [
+        "食货架",
+        "食货柜后",
+        "食货柜台",
+        "药材架",
+        "药柜台",
+        "药柜后"
       ]
     },
-    "Harvey Oak Supply Store": {
-      "supply store": [
-        "supply store product shelf",
-        "behind the supply store counter",
-        "supply store counter"
+    "西市布帛铺": {
+      "布帛铺": [
+        "布帛架",
+        "布帛柜后",
+        "布帛柜台"
       ]
     },
-    "Johnson Park": {
-      "park": [
-        "park garden"
+    "曲江池畔": {
+      "园林": [
+        "曲江园林"
       ]
     },
-    "The Rose and Crown Pub": {
-      "pub": [
-        "shelf",
-        "refrigerator",
-        "bar customer seating",
-        "behind the bar counter",
-        "kitchen sink",
-        "cooking area",
-        "microphone"
-      ]
-    },
-    "Hobbs Cafe": {
-      "cafe": [
-        "refrigerator",
-        "cafe customer seating",
-        "cooking area",
-        "kitchen sink",
-        "behind the cafe counter",
-        "piano"
+    "明珠茶馆": {
+      "茶室": [
+        "食盒柜",
+        "茶客席",
+        "灶台",
+        "水缸",
+        "茶台后",
+        "古琴"
       ]
     }
   }

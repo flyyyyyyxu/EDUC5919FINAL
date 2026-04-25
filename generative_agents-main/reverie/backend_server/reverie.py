@@ -34,6 +34,7 @@ from global_methods import *
 from utils import *
 from maze import *
 from persona.persona import *
+from json_logger import init_logger
 
 ##############################################################################
 #                                  REVERIE                                   #
@@ -153,6 +154,8 @@ class ReverieServer:
     with open(f"{fs_temp_storage}/curr_step.json", "w") as outfile: 
       outfile.write(json.dumps(curr_step, indent=2))
 
+    self.logger = init_logger(self.sim_code, fs_storage, LOG_LEVEL)
+
 
   def save(self): 
     """
@@ -185,6 +188,11 @@ class ReverieServer:
     for persona_name, persona in self.personas.items(): 
       save_folder = f"{sim_folder}/personas/{persona_name}/bootstrap_memory"
       persona.save(save_folder)
+
+    try:
+      self.logger.finalize(self.step, list(self.personas.keys()))
+    except Exception:
+      pass
 
 
   def start_path_tester_server(self): 
@@ -301,6 +309,7 @@ class ReverieServer:
     # So we need to keep track of which event we added. 
     # <game_obj_cleanup> is used for that. 
     game_obj_cleanup = dict()
+    initial_step = self.step
 
     # The main while loop of Reverie. 
     while (True): 
@@ -325,6 +334,8 @@ class ReverieServer:
           pass
       
         if env_retrieved: 
+          self.logger.set_step(self.step)
+
           # This is where we go through <game_obj_cleanup> to clean up all 
           # object actions that were used in this cylce. 
           for key, val in game_obj_cleanup.items(): 
@@ -401,6 +412,12 @@ class ReverieServer:
           with open(curr_move_file, "w") as outfile: 
             outfile.write(json.dumps(movements, indent=2))
 
+          self.logger.log_step_complete(
+            self.step,
+            movements["meta"]["curr_time"],
+            movements["persona"],
+          )
+
           # After this cycle, the world takes one step forward, and the
           # current time moves by <sec_per_step> amount.
           self.step += 1
@@ -411,10 +428,14 @@ class ReverieServer:
           # Auto-save every 100 steps so progress isn't lost on crash.
           if self.step % 100 == 0:
             self.save()
-            print(f"[Auto-saved at step {self.step}]")
+            self.logger.log_auto_save(self.step)
+            print(f"[Step {self.step}]", flush=True)
           
       # Sleep so we don't burn our machines. 
       time.sleep(self.server_sleep)
+
+    if self.step != initial_step and self.step % 100 != 0:
+      print(f"[Step {self.step}]", flush=True)
 
 
   def open_server(self): 
@@ -445,6 +466,8 @@ class ReverieServer:
           # Finishes the simulation environment and saves the progress. 
           # Example: fin
           self.save()
+          self.logger.finalize(self.step, list(self.personas.keys()))
+          print(f"Summary: {fs_storage}/{self.sim_code}/logs/sim_summary.json")
           break
 
         elif sim_command.lower() == "start path tester mode": 
@@ -615,9 +638,6 @@ if __name__ == '__main__':
 
   rs = ReverieServer(origin, target)
   rs.open_server()
-
-
-
 
 
 

@@ -17,9 +17,14 @@ from global_methods import *
 from persona.prompt_template.run_gpt_prompt import *
 from persona.prompt_template.gpt_structure import *
 from persona.cognitive_modules.retrieve import *
+from json_logger import get_logger
+
+
+def _log_gns(func_name, persona):
+  get_logger().log_gns_function(func_name, persona.scratch.name)
 
 def generate_focal_points(persona, n=3): 
-  if debug: print ("GNS FUNCTION: <generate_focal_points>")
+  _log_gns("generate_focal_points", persona)
   
   nodes = [[i.last_accessed, i]
             for i in persona.a_mem.seq_event + persona.a_mem.seq_thought
@@ -36,15 +41,13 @@ def generate_focal_points(persona, n=3):
 
 
 def generate_insights_and_evidence(persona, nodes, n=5): 
-  if debug: print ("GNS FUNCTION: <generate_insights_and_evidence>")
+  _log_gns("generate_insights_and_evidence", persona)
 
   statements = ""
   for count, node in enumerate(nodes): 
     statements += f'{str(count)}. {node.embedding_key}\n'
 
   ret = run_gpt_prompt_insight_and_guidance(persona, statements, n)[0]
-
-  print (ret)
   try: 
 
     for thought, evi_raw in ret.items(): 
@@ -66,12 +69,12 @@ def generate_action_event_triple(act_desp, persona):
   EXAMPLE OUTPUT: 
     "🧈🍞"
   """
-  if debug: print ("GNS FUNCTION: <generate_action_event_triple>")
+  _log_gns("generate_action_event_triple", persona)
   return run_gpt_prompt_event_triple(act_desp, persona)[0]
 
 
 def generate_poig_score(persona, event_type, description): 
-  if debug: print ("GNS FUNCTION: <generate_poig_score>")
+  _log_gns("generate_poig_score", persona)
 
   if "is idle" in description: 
     return 1
@@ -85,12 +88,12 @@ def generate_poig_score(persona, event_type, description):
 
 
 def generate_planning_thought_on_convo(persona, all_utt):
-  if debug: print ("GNS FUNCTION: <generate_planning_thought_on_convo>")
+  _log_gns("generate_planning_thought_on_convo", persona)
   return run_gpt_prompt_planning_thought_on_convo(persona, all_utt)[0]
 
 
 def generate_memo_on_convo(persona, all_utt):
-  if debug: print ("GNS FUNCTION: <generate_memo_on_convo>")
+  _log_gns("generate_memo_on_convo", persona)
   return run_gpt_prompt_memo_on_convo(persona, all_utt)[0]
 
 
@@ -111,14 +114,13 @@ def run_reflect(persona):
   # Retrieve the relevant Nodes object for each of the focal points. 
   # <retrieved> has keys of focal points, and values of the associated Nodes. 
   retrieved = new_retrieve(persona, focal_points)
+  logged_insights = []
 
   # For each of the focal points, generate thoughts and save it in the 
   # agent's memory. 
   for focal_pt, nodes in retrieved.items(): 
-    xx = [i.embedding_key for i in nodes]
-    for xxx in xx: print (xxx)
-
     thoughts = generate_insights_and_evidence(persona, nodes, 5)
+    logged_insights.extend(list(thoughts.keys()))
     for thought, evidence in thoughts.items(): 
       created = persona.scratch.curr_time
       expiration = persona.scratch.curr_time + datetime.timedelta(days=30)
@@ -130,6 +132,9 @@ def run_reflect(persona):
       persona.a_mem.add_thought(created, expiration, s, p, o, 
                                 thought, keywords, thought_poignancy, 
                                 thought_embedding_pair, evidence)
+
+  if logged_insights:
+    get_logger().log_reflection(persona.scratch.name, logged_insights)
 
 
 def reflection_trigger(persona): 
@@ -146,9 +151,6 @@ def reflection_trigger(persona):
     True if we are running a new reflection. 
     False otherwise. 
   """
-  print (persona.scratch.name, "persona.scratch.importance_trigger_curr::", persona.scratch.importance_trigger_curr)
-  print (persona.scratch.importance_trigger_max)
-
   if (persona.scratch.importance_trigger_curr <= 0 and 
       [] != persona.a_mem.seq_event + persona.a_mem.seq_thought): 
     return True 
@@ -242,8 +244,6 @@ def reflect(persona):
       persona.a_mem.add_thought(created, expiration, s, p, o, 
                                 memo_thought, keywords, thought_poignancy, 
                                 thought_embedding_pair, evidence)
-
-
 
 
 
