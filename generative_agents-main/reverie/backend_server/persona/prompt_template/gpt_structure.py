@@ -177,7 +177,7 @@ def _call_minimax(messages,
     "messages": messages,
     "temperature": _clamp_temperature(temperature),
     "top_p": min(max(float(top_p), 0.01), 1.0),
-    "max_completion_tokens": max_completion_tokens,
+    "max_tokens": max_completion_tokens,
   }
   response = _request_with_retries(
     MINIMAX_CHAT_COMPLETIONS_URL,
