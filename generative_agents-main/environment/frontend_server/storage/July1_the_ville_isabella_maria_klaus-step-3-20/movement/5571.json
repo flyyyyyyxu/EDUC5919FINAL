@@ -6,14 +6,14 @@
         49
       ],
       "pronunciatio": "\ud83d\udcac",
-      "description": "conversing about preparations for the Valentine's Day party at Hobbs Cafe including decorations and snacks, with Isabella Rodriguez and Maria Lopez @ <persona> Maria Lopez",
+      "description": "conversing about preparations for the Valentine's Day party at Hobbs Cafe including decorations and snacks, with Isabella Rodriguez and Chen Zian @ <persona> Chen Zian",
       "chat": [
         [
           "Isabella Rodriguez",
           "Hey Maria! I'm so glad I ran into you. I wanted to remind you about the Valentine's Day party at Hobbs Cafe tomorrow. It's going to be so much fun! You should definitely come and bring your friends. It starts at 5pm and goes until 7pm. I really hope to see you there!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Hey Isabella, thanks for the reminder! I wouldn't miss the Valentine's Day party for anything. I'll definitely be there with Klaus. Can I help with anything for the party?"
         ],
         [
@@ -21,7 +21,7 @@
           "Thank you so much, Maria! I would really appreciate it if you could help with setting up decorations for the party. Could you bring some balloons and streamers?"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Sure, I can bring balloons and streamers for the party. Just let me know what colors you prefer."
         ],
         [
@@ -29,7 +29,7 @@
           "Thank you so much, Maria! I think red and pink would be great colors for the balloons and streamers. That would fit perfectly with the Valentine's Day theme. Can you also bring some heart-shaped decorations? I think that would add a nice touch."
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Of course! I can bring some heart-shaped decorations too. Is there anything else you need help with?"
         ],
         [
@@ -37,7 +37,7 @@
           "Thank you so much, Maria! I really appreciate your help. Just one more thing, could you also bring some Valentine's Day-themed snacks for the party? That would be a great addition!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Sure, I can bring some Valentine's Day-themed snacks for the party. Just let me know what kind of snacks you would like."
         ],
         [
@@ -45,7 +45,7 @@
           "Thank you, Maria! I think some heart-shaped cookies and chocolate-covered strawberries would be perfect for the Valentine's Day-themed snacks. Can you bring those?"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Sure, I can bring heart-shaped cookies and chocolate-covered strawberries for the party."
         ],
         [
@@ -53,7 +53,7 @@
           "That sounds perfect! Thank you so much, Maria. Your help is greatly appreciated. See you at the party tomorrow!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Is there a specific time you would like me to arrive to help with the decorations?"
         ],
         [
@@ -61,7 +61,7 @@
           "Could you please arrive at the cafe around 4pm tomorrow before the party starts? That way we'll have enough time to set up the decorations together."
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Sounds good, Isabella! I'll make sure to arrive at Hobbs Cafe tomorrow at 4pm to help with the decorations. See you then!"
         ],
         [
@@ -69,25 +69,25 @@
           "Thank you, Maria! I'm really looking forward to seeing you and Klaus at the party tomorrow. It's going to be a great time!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Is there anything else I can do to help with the party?"
         ]
       ]
     },
-    "Maria Lopez": {
+    "Chen Zian": {
       "movement": [
         87,
         49
       ],
       "pronunciatio": "\ud83d\udcac",
-      "description": "conversing about preparations for the Valentine's Day party at Hobbs Cafe including decorations and snacks, with Isabella Rodriguez and Maria Lopez @ <persona> Isabella Rodriguez",
+      "description": "conversing about preparations for the Valentine's Day party at Hobbs Cafe including decorations and snacks, with Isabella Rodriguez and Chen Zian @ <persona> Isabella Rodriguez",
       "chat": [
         [
           "Isabella Rodriguez",
           "Hey Maria! I'm so glad I ran into you. I wanted to remind you about the Valentine's Day party at Hobbs Cafe tomorrow. It's going to be so much fun! You should definitely come and bring your friends. It starts at 5pm and goes until 7pm. I really hope to see you there!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Hey Isabella, thanks for the reminder! I wouldn't miss the Valentine's Day party for anything. I'll definitely be there with Klaus. Can I help with anything for the party?"
         ],
         [
@@ -95,7 +95,7 @@
           "Thank you so much, Maria! I would really appreciate it if you could help with setting up decorations for the party. Could you bring some balloons and streamers?"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Sure, I can bring balloons and streamers for the party. Just let me know what colors you prefer."
         ],
         [
@@ -103,7 +103,7 @@
           "Thank you so much, Maria! I think red and pink would be great colors for the balloons and streamers. That would fit perfectly with the Valentine's Day theme. Can you also bring some heart-shaped decorations? I think that would add a nice touch."
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Of course! I can bring some heart-shaped decorations too. Is there anything else you need help with?"
         ],
         [
@@ -111,7 +111,7 @@
           "Thank you so much, Maria! I really appreciate your help. Just one more thing, could you also bring some Valentine's Day-themed snacks for the party? That would be a great addition!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Sure, I can bring some Valentine's Day-themed snacks for the party. Just let me know what kind of snacks you would like."
         ],
         [
@@ -119,7 +119,7 @@
           "Thank you, Maria! I think some heart-shaped cookies and chocolate-covered strawberries would be perfect for the Valentine's Day-themed snacks. Can you bring those?"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Sure, I can bring heart-shaped cookies and chocolate-covered strawberries for the party."
         ],
         [
@@ -127,7 +127,7 @@
           "That sounds perfect! Thank you so much, Maria. Your help is greatly appreciated. See you at the party tomorrow!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Is there a specific time you would like me to arrive to help with the decorations?"
         ],
         [
@@ -135,7 +135,7 @@
           "Could you please arrive at the cafe around 4pm tomorrow before the party starts? That way we'll have enough time to set up the decorations together."
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Sounds good, Isabella! I'll make sure to arrive at Hobbs Cafe tomorrow at 4pm to help with the decorations. See you then!"
         ],
         [
@@ -143,7 +143,7 @@
           "Thank you, Maria! I'm really looking forward to seeing you and Klaus at the party tomorrow. It's going to be a great time!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Is there anything else I can do to help with the party?"
         ]
       ]

@@ -9,7 +9,7 @@
       "description": "taking a lunch break (responding to customer inquiries) @ the Ville:Hobbs Cafe:cafe:cafe customer seating",
       "chat": null
     },
-    "Maria Lopez": {
+    "Chen Zian": {
       "movement": [
         119,
         45
@@ -18,7 +18,7 @@
       "description": "conversing about conversing about Maria's research paper mentioned by Klaus @ <persona> Klaus Mueller",
       "chat": [
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Hi Klaus! How's your day going? Mind if I join you for lunch?"
         ],
         [
@@ -26,7 +26,7 @@
           "Hey Maria! My day is going well, thanks for asking. Of course, you can join me. How have you been?"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "I've been good, thanks! Just trying to stay organized with all the college work. By the way, I found it interesting that you mentioned my research paper. What made you think of it?"
         ]
       ]
@@ -37,10 +37,10 @@
         45
       ],
       "pronunciatio": "\ud83d\udcac",
-      "description": "conversing about conversing about Maria's research paper mentioned by Klaus @ <persona> Maria Lopez",
+      "description": "conversing about conversing about Maria's research paper mentioned by Klaus @ <persona> Chen Zian",
       "chat": [
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Hi Klaus! How's your day going? Mind if I join you for lunch?"
         ],
         [
@@ -48,7 +48,7 @@
           "Hey Maria! My day is going well, thanks for asking. Of course, you can join me. How have you been?"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "I've been good, thanks! Just trying to stay organized with all the college work. By the way, I found it interesting that you mentioned my research paper. What made you think of it?"
         ]
       ]

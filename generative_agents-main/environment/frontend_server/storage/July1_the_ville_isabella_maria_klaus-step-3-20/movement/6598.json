@@ -6,14 +6,14 @@
         43
       ],
       "pronunciatio": "\ud83d\udcac",
-      "description": "conversing about the decorations and preparations for the Valentine's Day party at Hobbs Cafe between Isabella Rodriguez and Maria Lopez. @ <persona> Maria Lopez",
+      "description": "conversing about the decorations and preparations for the Valentine's Day party at Hobbs Cafe between Isabella Rodriguez and Chen Zian. @ <persona> Chen Zian",
       "chat": [
         [
           "Isabella Rodriguez",
           "Hey Maria, I wanted to talk to you about the decorations for the Valentine's Day party at Hobbs Cafe. I found some really cute heart-shaped balloons and streamers at the store, and I think they would be perfect for the party. What do you think?"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "That sounds great, Isabella! I can bring those heart-shaped balloons and streamers to the party. And I can also bake some heart-shaped cookies and make chocolate-covered strawberries as Valentine's Day-themed snacks. What do you think?"
         ],
         [
@@ -21,7 +21,7 @@
           "That sounds perfect, Maria! Thank you so much for offering to bring the balloons, streamers, and Valentine's Day-themed snacks. Your help is greatly appreciated!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "What time do you need me to be at Hobbs Cafe tomorrow to help with the decorations?"
         ],
         [
@@ -29,7 +29,7 @@
           "I think it would be great if you could come to Hobbs Cafe at around 4pm to help with the decorations."
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Sure, 4pm works for me. I'll make sure to bring all the decorations and snacks!"
         ],
         [
@@ -37,7 +37,7 @@
           "Thank you again, Maria! I really appreciate your help. I'm so excited for the Valentine's Day party at Hobbs Cafe tomorrow!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Is there anything else I can do to help with the party?"
         ],
         [
@@ -45,7 +45,7 @@
           "Actually, there is one more thing you can help me with. I forgot to print out the Valentine's Day party invitation flyers. Can you help me design a nice flyer and print out some copies?"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Of course, Isabella! I'd be happy to help you design the Valentine's Day party invitation flyers. Just let me know what information you want to include and I can create a nice design for them."
         ],
         [
@@ -53,7 +53,7 @@
           "Thank you, Maria! Here are the details for the party that should be included on the flyers: The Valentine's Day party will be held at Hobbs Cafe on February 14th, 2023 from 5pm to 7pm. We'll have heart-shaped balloons, streamers, and Valentine's Day-themed snacks. It would be great if you could mention that in the flyer design as well. I really appreciate your help!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "I can definitely include all those details in the flyer design. Just let me know where I can access a computer and printer to work on it."
         ],
         [
@@ -61,7 +61,7 @@
           "You can use the computer and printer at Hobbs Cafe to work on the flyer design. Thank you again for your help, Maria!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Should I bring any specific decorations other than the heart-shaped balloons and streamers?"
         ],
         [
@@ -69,25 +69,25 @@
           "You don't need to bring any other decorations. The heart-shaped balloons and streamers will be enough to create a festive atmosphere. Thank you again for all your help, Maria!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Is there anything specific you would like me to include in the flyer design?"
         ]
       ]
     },
-    "Maria Lopez": {
+    "Chen Zian": {
       "movement": [
         85,
         50
       ],
       "pronunciatio": "\ud83d\udcac",
-      "description": "conversing about the decorations and preparations for the Valentine's Day party at Hobbs Cafe between Isabella Rodriguez and Maria Lopez. @ <persona> Isabella Rodriguez",
+      "description": "conversing about the decorations and preparations for the Valentine's Day party at Hobbs Cafe between Isabella Rodriguez and Chen Zian. @ <persona> Isabella Rodriguez",
       "chat": [
         [
           "Isabella Rodriguez",
           "Hey Maria, I wanted to talk to you about the decorations for the Valentine's Day party at Hobbs Cafe. I found some really cute heart-shaped balloons and streamers at the store, and I think they would be perfect for the party. What do you think?"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "That sounds great, Isabella! I can bring those heart-shaped balloons and streamers to the party. And I can also bake some heart-shaped cookies and make chocolate-covered strawberries as Valentine's Day-themed snacks. What do you think?"
         ],
         [
@@ -95,7 +95,7 @@
           "That sounds perfect, Maria! Thank you so much for offering to bring the balloons, streamers, and Valentine's Day-themed snacks. Your help is greatly appreciated!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "What time do you need me to be at Hobbs Cafe tomorrow to help with the decorations?"
         ],
         [
@@ -103,7 +103,7 @@
           "I think it would be great if you could come to Hobbs Cafe at around 4pm to help with the decorations."
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Sure, 4pm works for me. I'll make sure to bring all the decorations and snacks!"
         ],
         [
@@ -111,7 +111,7 @@
           "Thank you again, Maria! I really appreciate your help. I'm so excited for the Valentine's Day party at Hobbs Cafe tomorrow!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Is there anything else I can do to help with the party?"
         ],
         [
@@ -119,7 +119,7 @@
           "Actually, there is one more thing you can help me with. I forgot to print out the Valentine's Day party invitation flyers. Can you help me design a nice flyer and print out some copies?"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Of course, Isabella! I'd be happy to help you design the Valentine's Day party invitation flyers. Just let me know what information you want to include and I can create a nice design for them."
         ],
         [
@@ -127,7 +127,7 @@
           "Thank you, Maria! Here are the details for the party that should be included on the flyers: The Valentine's Day party will be held at Hobbs Cafe on February 14th, 2023 from 5pm to 7pm. We'll have heart-shaped balloons, streamers, and Valentine's Day-themed snacks. It would be great if you could mention that in the flyer design as well. I really appreciate your help!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "I can definitely include all those details in the flyer design. Just let me know where I can access a computer and printer to work on it."
         ],
         [
@@ -135,7 +135,7 @@
           "You can use the computer and printer at Hobbs Cafe to work on the flyer design. Thank you again for your help, Maria!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Should I bring any specific decorations other than the heart-shaped balloons and streamers?"
         ],
         [
@@ -143,7 +143,7 @@
           "You don't need to bring any other decorations. The heart-shaped balloons and streamers will be enough to create a festive atmosphere. Thank you again for all your help, Maria!"
         ],
         [
-          "Maria Lopez",
+          "Chen Zian",
           "Is there anything specific you would like me to include in the flyer design?"
         ]
       ]
