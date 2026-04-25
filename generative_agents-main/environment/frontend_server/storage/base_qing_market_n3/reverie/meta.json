@@ -1,7 +1,7 @@
 {
   "fork_sim_code": "base_the_ville_isabella_maria_klaus",
-  "start_date": "February 15, 742",
-  "curr_time": "February 15, 742, 06:00:00",
+  "start_date": "February 15, 0742",
+  "curr_time": "February 15, 0742, 06:00:00",
   "sec_per_step": 10,
   "maze_name": "the_ville",
   "persona_names": [
