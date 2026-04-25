@@ -5,10 +5,13 @@ File: retrieve.py
 Description: This defines the "Retrieve" module for generative agents. 
 """
 import sys
-sys.path.append('../../')
+from pathlib import Path
 
-from global_methods import *
-from persona.prompt_template.gpt_structure import *
+BACKEND_SERVER_ROOT = Path(__file__).resolve().parents[2]
+if str(BACKEND_SERVER_ROOT) not in sys.path:
+  sys.path.append(str(BACKEND_SERVER_ROOT))
+
+from persona.prompt_template.gpt_structure import get_embedding
 
 from numpy import dot
 from numpy.linalg import norm
@@ -269,7 +272,6 @@ def new_retrieve(persona, focal_points, n_count=30):
     retrieved[focal_pt] = master_nodes
 
   return retrieved
-
 
 
 
