@@ -110,7 +110,7 @@ class ReverieServer:
     # # personas are talking to each other. It takes a key of a persona's full
     # # name, and value of another persona's full name who is talking to the 
     # # original persona. 
-    # # e.g., dict["Isabella Rodriguez"] = ["Maria Lopez"]
+    # # e.g., dict["Isabella Rodriguez"] = ["Chen Zian"]
     # self.persona_convo_match = dict()
     # # <persona_convo> contains the actual content of the conversations. It
     # # takes as keys, a pair of persona names, and val of a string convo. 
@@ -394,7 +394,7 @@ class ReverieServer:
           # We then write the personas' movements to a file that will be sent 
           # to the frontend server. 
           # Example json output: 
-          # {"persona": {"Maria Lopez": {"movement": [58, 9]}},
+          # {"persona": {"Chen Zian": {"movement": [58, 9]}},
           #  "persona": {"Klaus Mueller": {"movement": [38, 12]}}, 
           #  "meta": {curr_time: <datetime>}}
           curr_move_file = f"{sim_folder}/movement/{self.step}.json"
