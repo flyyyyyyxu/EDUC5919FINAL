@@ -5,6 +5,7 @@ Run this before starting the backend simulation server so configuration
 problems fail fast with actionable messages.
 """
 from pathlib import Path
+import hashlib
 import sys
 
 
@@ -26,6 +27,20 @@ def _read_env(env_path):
     value = value.strip().strip("'").strip('"')
     values[key] = value
   return values
+
+
+def _mask_value(value, visible=6):
+  if not value:
+    return "<missing>"
+  if len(value) <= visible * 2:
+    return value[:visible] + "..."
+  return value[:visible] + "..." + value[-visible:]
+
+
+def _digest_value(value):
+  if not value:
+    return "<missing>"
+  return hashlib.sha256(value.encode("utf-8")).hexdigest()[:12]
 
 
 def _check_imports():
@@ -80,6 +95,8 @@ def main():
   print(f"- env: {ENV_PATH}")
   print(f"- base: {base}")
   print(f"- model: {model}")
+  print(f"- key: {_mask_value(key)}")
+  print(f"- key_sha12: {_digest_value(key)}")
   return 0
 
 
