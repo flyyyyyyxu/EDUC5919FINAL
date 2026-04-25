@@ -8,6 +8,7 @@ import hashlib
 import json
 import re
 import time
+from typing import Optional
 
 _COMPLETION_SYSTEM = (
   "You are a text completion engine. The user gives you a text that ends "
@@ -38,6 +39,19 @@ from utils import *
 from json_logger import get_logger
 
 MINIMAX_CHAT_COMPLETIONS_URL = f"{minimax_api_base}/chat/completions"
+MINIMAX_LEGACY_COMPLETIONS_URL = f"{minimax_api_base}/text/chatcompletion_v2"
+_RETRYABLE_STATUS_CODES = {408, 409, 429, 500, 502, 503, 504}
+_FALLBACK_STATUS_CODES = {400, 404, 405, 415, 422}
+_REQUEST_TIMEOUT_SECONDS = 180
+_MAX_COMPLETION_TOKENS_LIMIT = 2048
+
+
+class MiniMaxConfigurationError(RuntimeError):
+  pass
+
+
+class MiniMaxAuthError(RuntimeError):
+  pass
 
 
 def temp_sleep(seconds=0.1):
@@ -50,6 +64,103 @@ def _clamp_temperature(temperature):
   return min(max(float(temperature), 0.01), 1.0)
 
 
+def _resolve_api_key():
+  if not MiniMax_api_key:
+    raise MiniMaxConfigurationError(
+      "MiniMax API key is missing. Set MINIMAX_API_KEY, MINIMAX_KEY, "
+      "or OPENAI_API_KEY before running the simulation."
+    )
+  return MiniMax_api_key
+
+
+def _clamp_max_completion_tokens(max_tokens):
+  tokens = int(max_tokens) if max_tokens is not None else 512
+  tokens = max(1, tokens)
+  return min(tokens, _MAX_COMPLETION_TOKENS_LIMIT)
+
+
+def _extract_response_text(data):
+  try:
+    content = data["choices"][0]["message"]["content"]
+  except (KeyError, IndexError, TypeError):
+    raise RuntimeError(f"MiniMax response missing message content: {data}")
+  if content is None:
+    return ""
+  return str(content)
+
+
+def _should_fallback_to_legacy(status_code, body_text):
+  if status_code not in _FALLBACK_STATUS_CODES:
+    return False
+  lowered = (body_text or "").lower()
+  fallback_markers = (
+    "max_completion_tokens",
+    "unknown field",
+    "invalid request",
+    "not found",
+    "unsupported media type",
+  )
+  return any(marker in lowered for marker in fallback_markers)
+
+
+def _log_http_error(context, status_code, body_text, url):
+  try:
+    get_logger().log_error(
+      context,
+      f"HTTP {status_code} @ {url}: {body_text}",
+    )
+  except Exception:
+    pass
+
+
+def _post_minimax(url, payload, timeout):
+  return requests.post(
+    url,
+    headers={
+      "Authorization": f"Bearer {_resolve_api_key()}",
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+    json=payload,
+    timeout=timeout,
+  )
+
+
+def _request_with_retries(url,
+                          payload,
+                          timeout,
+                          context,
+                          max_attempts=3):
+  last_error: Optional[Exception] = None
+  for attempt in range(1, max_attempts + 1):
+    try:
+      response = _post_minimax(url, payload, timeout)
+    except requests.RequestException as exc:
+      last_error = exc
+      if attempt == max_attempts:
+        break
+      time.sleep(min(2 ** (attempt - 1), 4))
+      continue
+
+    if response.ok:
+      return response
+
+    _log_http_error(context, response.status_code, response.text, url)
+    if response.status_code in {401, 403}:
+      raise MiniMaxAuthError(
+        f"MiniMax authentication failed ({response.status_code}) for {url}. "
+        "Check the API key and base URL in your environment."
+      )
+    if response.status_code in _RETRYABLE_STATUS_CODES and attempt < max_attempts:
+      time.sleep(min(2 ** (attempt - 1), 4))
+      continue
+    return response
+
+  if last_error is not None:
+    raise last_error
+  raise RuntimeError(f"MiniMax request failed without response for {url}")
+
+
 def _call_minimax(messages,
                   max_tokens=512,
                   temperature=1.0,
@@ -59,33 +170,41 @@ def _call_minimax(messages,
   if not messages or messages[0].get("role") != "system":
     messages = [{"role": "system", "content": _COMPLETION_SYSTEM}] + messages
 
+  max_completion_tokens = _clamp_max_completion_tokens(max_tokens)
+  model_name = model or minimax_text_model
   payload = {
     "model": model or minimax_text_model,
     "messages": messages,
     "temperature": _clamp_temperature(temperature),
     "top_p": min(max(float(top_p), 0.01), 1.0),
-    "max_tokens": int(max_tokens) + (200 if max_tokens <= 100 else 800),
+    "max_completion_tokens": max_completion_tokens,
   }
-  response = requests.post(
+  response = _request_with_retries(
     MINIMAX_CHAT_COMPLETIONS_URL,
-    headers={
-      "Authorization": f"Bearer {MiniMax_api_key}",
-      "Content-Type": "application/json",
-    },
-    json=payload,
-    timeout=180,
+    payload,
+    _REQUEST_TIMEOUT_SECONDS,
+    "minimax_http",
   )
-  if not response.ok:
-    try:
-      get_logger().log_error(
-        "minimax_http",
-        f"HTTP {response.status_code}: {response.text}",
-      )
-    except Exception:
-      pass
+
+  if (not response.ok and
+      _should_fallback_to_legacy(response.status_code, response.text)):
+    legacy_payload = {
+      "model": model_name,
+      "messages": messages,
+      "temperature": _clamp_temperature(temperature),
+      "top_p": min(max(float(top_p), 0.01), 1.0),
+      "max_tokens": max_completion_tokens,
+    }
+    response = _request_with_retries(
+      MINIMAX_LEGACY_COMPLETIONS_URL,
+      legacy_payload,
+      _REQUEST_TIMEOUT_SECONDS,
+      "minimax_http_legacy",
+    )
+
   response.raise_for_status()
   data = response.json()
-  content = data["choices"][0]["message"]["content"]
+  content = _extract_response_text(data)
   # Strip chain-of-thought think blocks
   content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL).strip()
   # Drop leading lines that are meta-commentary rather than the actual completion
@@ -129,6 +248,8 @@ def GPT4_request(prompt):
       get_logger().log_error("gpt4_request", str(e))
     except Exception:
       pass
+    if isinstance(e, (MiniMaxAuthError, MiniMaxConfigurationError)):
+      raise
     return "MiniMax ERROR"
 
 
@@ -149,6 +270,8 @@ def ChatGPT_request(prompt):
       get_logger().log_error("chatgpt_request", str(e))
     except Exception:
       pass
+    if isinstance(e, (MiniMaxAuthError, MiniMaxConfigurationError)):
+      raise
     return "MiniMax ERROR"
 
 
@@ -175,6 +298,8 @@ def GPT4_safe_generate_response(prompt,
       if func_validate(curr_gpt_response, prompt=prompt):
         return func_clean_up(curr_gpt_response, prompt=prompt)
 
+    except (MiniMaxAuthError, MiniMaxConfigurationError):
+      raise
     except:
       pass
 
@@ -204,6 +329,8 @@ def ChatGPT_safe_generate_response(prompt,
       if func_validate(curr_gpt_response, prompt=prompt):
         return func_clean_up(curr_gpt_response, prompt=prompt)
 
+    except (MiniMaxAuthError, MiniMaxConfigurationError):
+      raise
     except:
       pass
 
@@ -225,6 +352,8 @@ def ChatGPT_safe_generate_response_OLD(prompt,
         print(f"---- repeat count: {i}")
         print(curr_gpt_response)
         print("~~~~")
+    except (MiniMaxAuthError, MiniMaxConfigurationError):
+      raise
     except:
       pass
   print("FAIL SAFE TRIGGERED")
@@ -260,6 +389,8 @@ def GPT_request(prompt, gpt_parameter):
       get_logger().log_error("gpt_request", str(e))
     except Exception:
       pass
+    if isinstance(e, (MiniMaxAuthError, MiniMaxConfigurationError)):
+      raise
     return "MINIMAX REQUEST FAILED"
 
 
@@ -293,9 +424,12 @@ def safe_generate_response(prompt,
     print(prompt)
 
   for i in range(repeat):
-    curr_gpt_response = GPT_request(prompt, gpt_parameter)
-    if func_validate(curr_gpt_response, prompt=prompt):
-      return func_clean_up(curr_gpt_response, prompt=prompt)
+    try:
+      curr_gpt_response = GPT_request(prompt, gpt_parameter)
+      if func_validate(curr_gpt_response, prompt=prompt):
+        return func_clean_up(curr_gpt_response, prompt=prompt)
+    except (MiniMaxAuthError, MiniMaxConfigurationError):
+      raise
   return fail_safe_response
 
 

@@ -12,8 +12,8 @@ import datetime as dt
 import pathlib
 import os
 import sys
-import numpy
 import math
+import statistics
 import shutil, errno
 
 from os import listdir
@@ -204,8 +204,9 @@ def std(list_of_val):
   RETURNS: 
     The std of the values
   """
-  std = numpy.std(list_of_val)
-  return std
+  if not list_of_val:
+    return 0
+  return statistics.pstdev(list_of_val)
 
 
 def copyanything(src, dst):
@@ -227,7 +228,6 @@ def copyanything(src, dst):
 
 if __name__ == '__main__':
   pass
-
 
 
 

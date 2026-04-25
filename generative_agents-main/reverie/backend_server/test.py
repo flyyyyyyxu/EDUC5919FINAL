@@ -21,13 +21,14 @@ def ChatGPT_request(prompt):
       headers={
         "Authorization": f"Bearer {MiniMax_api_key}",
         "Content-Type": "application/json",
+        "Accept": "application/json",
       },
       json={
         "model": minimax_text_model,
         "messages": [{"role": "user", "content": prompt}],
         "temperature": 0.7,
         "top_p": 0.95,
-        "max_tokens": 1024,
+        "max_completion_tokens": 1024,
       },
       timeout=180,
     )
