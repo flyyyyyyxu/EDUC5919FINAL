@@ -363,22 +363,30 @@ def run_gpt_prompt_task_decomp(persona,
     print (gpt_response)
     print ("-==- -==- -==- ")
 
-    # TODO SOMETHING HERE sometimes fails... See screenshot
     temp = [i.strip() for i in gpt_response.split("\n")]
     _cr = []
     cr = []
-    for count, i in enumerate(temp): 
-      if count != 0: 
+    for count, i in enumerate(temp):
+      if count != 0:
         _cr += [" ".join([j.strip () for j in i.split(" ")][3:])]
-      else: 
+      else:
         _cr += [i]
-    for count, i in enumerate(_cr): 
+    for count, i in enumerate(_cr):
+      if not i:
+        continue
       k = [j.strip() for j in i.split("(duration in minutes:")]
+      if len(k) < 2:
+        continue
       task = k[0]
-      if task[-1] == ".": 
+      if not task:
+        continue
+      if task[-1] == ".":
         task = task[:-1]
-      duration = int(k[1].split(",")[0].strip())
-      cr += [[task, duration]]
+      try:
+        dur = int(k[1].split(",")[0].strip())
+      except (ValueError, IndexError):
+        continue
+      cr += [[task, dur]]
 
     total_expected_min = int(prompt.split("(total duration in minutes")[-1]
                                    .split("):")[0].strip())
@@ -415,17 +423,17 @@ def run_gpt_prompt_task_decomp(persona,
 
     return cr
 
-  def __func_validate(gpt_response, prompt=""): 
-    # TODO -- this sometimes generates error 
-    try: 
-      __func_clean_up(gpt_response)
-    except: 
-      pass
-      # return False
+  def __func_validate(gpt_response, prompt=""):
+    try:
+      result = __func_clean_up(gpt_response)
+      if not result:
+        return False
+    except:
+      return False
     return gpt_response
 
-  def get_fail_safe(): 
-    fs = ["asleep"]
+  def get_fail_safe():
+    fs = [[task, duration]]
     return fs
 
   gpt_param = {"engine": "text-davinci-003", "max_tokens": 1000, 
@@ -459,21 +467,19 @@ def run_gpt_prompt_task_decomp(persona,
 
   fin_output = []
   time_sum = 0
-  for i_task, i_duration in output: 
+  for i_task, i_duration in output:
     time_sum += i_duration
-    # HM?????????
-    # if time_sum < duration: 
-    if time_sum <= duration: 
+    if time_sum <= duration:
       fin_output += [[i_task, i_duration]]
-    else: 
+    else:
       break
+  if not fin_output:
+    fin_output = [[task, duration]]
   ftime_sum = 0
-  for fi_task, fi_duration in fin_output: 
+  for fi_task, fi_duration in fin_output:
     ftime_sum += fi_duration
-  
-  # print ("for debugging... line 365", fin_output)
   fin_output[-1][1] += (duration - ftime_sum)
-  output = fin_output 
+  output = fin_output
 
 
 
