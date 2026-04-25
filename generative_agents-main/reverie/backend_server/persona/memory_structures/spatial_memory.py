@@ -101,11 +101,20 @@ class MemoryTree:
     if not curr_arena: 
       return ""
 
-    try: 
-      x = ", ".join(list(self.tree[curr_world][curr_sector][curr_arena]))
-    except: 
-      x = ", ".join(list(self.tree[curr_world][curr_sector][curr_arena.lower()]))
-    return x
+    sector = self.tree.get(curr_world, {}).get(curr_sector, {})
+    if not sector:
+      return ""
+
+    candidates = [curr_arena, curr_arena.lower(), curr_arena.title()]
+    for candidate in candidates:
+      if candidate in sector:
+        return ", ".join(list(sector[candidate]))
+
+    for arena_name, objects in sector.items():
+      if arena_name.lower() == curr_arena.lower():
+        return ", ".join(list(objects))
+
+    return ""
 
 
 if __name__ == '__main__':
@@ -114,7 +123,6 @@ if __name__ == '__main__':
   x.print_tree()
 
   print (x.get_str_accessible_sector_arenas("dolores double studio:double studio"))
-
 
 
 

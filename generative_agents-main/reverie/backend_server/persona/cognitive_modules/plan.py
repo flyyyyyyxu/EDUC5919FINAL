@@ -548,6 +548,8 @@ def _determine_action(persona, maze):
     OUTPUT: 
       a boolean. True if we need to decompose, False otherwise. 
     """
+    if not isinstance(act_desp, str):
+      return False
     if "sleep" not in act_desp and "bed" not in act_desp: 
       return True
     elif "sleeping" in act_desp or "asleep" in act_desp or "in bed" in act_desp:
@@ -564,6 +566,21 @@ def _determine_action(persona, maze):
   # any given point. 
   curr_index = persona.scratch.get_f_daily_schedule_index()
   curr_index_60 = persona.scratch.get_f_daily_schedule_index(advance=60)
+
+  # LLM fallback paths can still leak malformed schedule entries; normalize
+  # them before any substring checks or decomposition logic.
+  sanitized_schedule = []
+  for entry in persona.scratch.f_daily_schedule:
+    if isinstance(entry, (list, tuple)) and len(entry) >= 2:
+      task = entry[0] if isinstance(entry[0], str) and entry[0] else "asleep"
+      try:
+        duration = int(entry[1])
+      except (TypeError, ValueError):
+        duration = 60
+      sanitized_schedule.append([task, duration])
+    else:
+      sanitized_schedule.append(["asleep", 60])
+  persona.scratch.f_daily_schedule = sanitized_schedule
 
   # * Decompose * 
   # During the first hour of the day, we need to decompose two hours 

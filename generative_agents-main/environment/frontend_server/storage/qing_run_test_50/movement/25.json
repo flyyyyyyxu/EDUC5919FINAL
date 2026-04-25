@@ -1,0 +1,34 @@
+{
+  "persona": {
+    "Li Mingzhu": {
+      "movement": [
+        72,
+        14
+      ],
+      "pronunciatio": "\ud83d\ude0b",
+      "description": "asleep @ the Ville:\u660e\u73e0\u8336\u9986:kitchen:<random>",
+      "chat": null
+    },
+    "Chen Zian": {
+      "movement": [
+        123,
+        57
+      ],
+      "pronunciatio": "\ud83d\ude0b",
+      "description": "asleep @ the Ville:\u5b66\u5b50\u5ba2\u820d:kitchen:<random>",
+      "chat": null
+    },
+    "An Lushan": {
+      "movement": [
+        126,
+        46
+      ],
+      "pronunciatio": "\ud83d\ude0b",
+      "description": "asleep @ the Ville:\u80e1\u59ec\u9152\u8086:kitchen:<random>",
+      "chat": null
+    }
+  },
+  "meta": {
+    "curr_time": "February 15, 0742, 06:04:10"
+  }
+}

@@ -76,8 +76,11 @@ def execute(persona, maze, personas, plan):
     elif "<random>" in plan: 
       # Executing a random location action.
       plan = ":".join(plan.split(":")[:-1])
-      target_tiles = maze.address_tiles[plan]
-      target_tiles = random.sample(list(target_tiles), 1)
+      if plan in maze.address_tiles:
+        target_tiles = maze.address_tiles[plan]
+        target_tiles = random.sample(list(target_tiles), 1)
+      else:
+        target_tiles = [persona.scratch.curr_tile]
 
     else: 
       # This is our default execution. We simply take the persona to the
@@ -86,7 +89,7 @@ def execute(persona, maze, personas, plan):
       # string form. <maze.address_tiles> takes this and returns candidate 
       # coordinates. 
       if plan not in maze.address_tiles: 
-        maze.address_tiles["Johnson Park:park:park garden"] #ERRORRRRRRR
+        target_tiles = [persona.scratch.curr_tile]
       else: 
         target_tiles = maze.address_tiles[plan]
 
@@ -154,8 +157,6 @@ def execute(persona, maze, personas, plan):
 
   execution = ret, persona.scratch.act_pronunciatio, description
   return execution
-
-
 
 
 

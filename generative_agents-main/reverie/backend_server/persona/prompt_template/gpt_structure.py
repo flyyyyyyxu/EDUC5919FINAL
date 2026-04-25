@@ -35,6 +35,7 @@ import numpy
 import requests
 
 from utils import *
+from json_logger import get_logger
 
 MINIMAX_CHAT_COMPLETIONS_URL = f"{minimax_api_base}/chat/completions"
 
@@ -75,7 +76,13 @@ def _call_minimax(messages,
     timeout=180,
   )
   if not response.ok:
-    print(f"MINIMAX HTTP {response.status_code}: {response.text}")
+    try:
+      get_logger().log_error(
+        "minimax_http",
+        f"HTTP {response.status_code}: {response.text}",
+      )
+    except Exception:
+      pass
   response.raise_for_status()
   data = response.json()
   content = data["choices"][0]["message"]["content"]
@@ -117,8 +124,11 @@ def GPT4_request(prompt):
       temperature=0.7,
       model=minimax_text_model,
     )
-  except:
-    print("MiniMax ERROR")
+  except Exception as e:
+    try:
+      get_logger().log_error("gpt4_request", str(e))
+    except Exception:
+      pass
     return "MiniMax ERROR"
 
 
@@ -134,8 +144,11 @@ def ChatGPT_request(prompt):
       temperature=0.7,
       model=minimax_text_model,
     )
-  except:
-    print("MiniMax ERROR")
+  except Exception as e:
+    try:
+      get_logger().log_error("chatgpt_request", str(e))
+    except Exception:
+      pass
     return "MiniMax ERROR"
 
 
@@ -152,10 +165,6 @@ def GPT4_safe_generate_response(prompt,
   prompt += "Example output json:\n"
   prompt += '{"output": "' + str(example_output) + '"}'
 
-  if verbose:
-    print("CHAT GPT PROMPT")
-    print(prompt)
-
   for i in range(repeat):
     try:
       curr_gpt_response = GPT4_request(prompt).strip()
@@ -166,14 +175,10 @@ def GPT4_safe_generate_response(prompt,
       if func_validate(curr_gpt_response, prompt=prompt):
         return func_clean_up(curr_gpt_response, prompt=prompt)
 
-      if verbose:
-        print("---- repeat count: \n", i, curr_gpt_response)
-        print(curr_gpt_response)
-        print("~~~~")
     except:
       pass
 
-  return False
+  return fail_safe_response
 
 
 def ChatGPT_safe_generate_response(prompt,
@@ -189,10 +194,6 @@ def ChatGPT_safe_generate_response(prompt,
   prompt += "Example output json:\n"
   prompt += '{"output": "' + str(example_output) + '"}'
 
-  if verbose:
-    print("CHAT GPT PROMPT")
-    print(prompt)
-
   for i in range(repeat):
     try:
       curr_gpt_response = ChatGPT_request(prompt).strip()
@@ -203,14 +204,10 @@ def ChatGPT_safe_generate_response(prompt,
       if func_validate(curr_gpt_response, prompt=prompt):
         return func_clean_up(curr_gpt_response, prompt=prompt)
 
-      if verbose:
-        print("---- repeat count: \n", i, curr_gpt_response)
-        print(curr_gpt_response)
-        print("~~~~")
     except:
       pass
 
-  return False
+  return fail_safe_response
 
 
 def ChatGPT_safe_generate_response_OLD(prompt,
@@ -219,10 +216,6 @@ def ChatGPT_safe_generate_response_OLD(prompt,
                                        func_validate=None,
                                        func_clean_up=None,
                                        verbose=False):
-  if verbose:
-    print("CHAT GPT PROMPT")
-    print(prompt)
-
   for i in range(repeat):
     try:
       curr_gpt_response = ChatGPT_request(prompt).strip()
@@ -263,7 +256,10 @@ def GPT_request(prompt, gpt_parameter):
       result = result[len(m.group(1)):]
     return result
   except Exception as e:
-    print(f"MINIMAX REQUEST FAILED: {e}")
+    try:
+      get_logger().log_error("gpt_request", str(e))
+    except Exception:
+      pass
     return "MINIMAX REQUEST FAILED"
 
 
@@ -300,10 +296,6 @@ def safe_generate_response(prompt,
     curr_gpt_response = GPT_request(prompt, gpt_parameter)
     if func_validate(curr_gpt_response, prompt=prompt):
       return func_clean_up(curr_gpt_response, prompt=prompt)
-    if verbose:
-      print("---- repeat count: ", i, curr_gpt_response)
-      print(curr_gpt_response)
-      print("~~~~")
   return fail_safe_response
 
 
